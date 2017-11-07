@@ -16,25 +16,42 @@
   </div>
 
   <div data-role="main" class="ui-content">
+	<div data-role="fieldcontain">
+		<label for="password">Enter PIN code:</label>
+		<input type="password" name="password" id="password" value="" />
+	</div>	
     <input id="on" type="button" value="Turn ON">
     <input id="off" type="button" value="Turn OFF">
   </div>
 
   <script>
+  function is_password_correct() {
+    var password = $('#password').val();
+    if(password == 'spongebob') return true;
+    else {
+      alert('Your password is not correct!');
+      return false;
+    }
+  }
+	  
   $('#on').click(function() {
-    $.ajax({
-      type: "POST",
-      url: "lol-start.php" 
-    }).done(function(data) {
-    });    
+    if(is_password_correct()) {
+      $.ajax({
+        type: "POST",
+        url: "lol-start.php" 
+      }).done(function(data) {
+      });
+    }
   });
 
   $('#off').click(function() {
-    $.ajax({
-      type: "POST",
-      url: "buzzeroff.php"
-    }).done(function( msg ) {
-    });
+    if(is_password_correct()) {
+      $.ajax({
+        type: "POST",
+        url: "buzzeroff.php"
+      }).done(function( msg ) {
+      });
+    }
   });
   </script>
 
